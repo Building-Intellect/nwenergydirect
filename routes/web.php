@@ -5,6 +5,8 @@ Route::get('/', 'LandingPageController@index')->name('landing-page');
 Route::get('/shop', 'ShopController@index')->name('shop.index');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
+Route::get('/about', 'AboutController@index')->name('about');
+
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart', 'CartController@store')->name('cart.store');
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
@@ -35,3 +37,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'ShopController@search')->name('search');
+
+// Clear all cache values:
+Route::get('clear-cache', function() {
+    $exitCode1 = Artisan::call('cache:clear');
+    $exitCode2 = Artisan::call('route:clear');
+    $exitCode3 = Artisan::call('view:clear');
+    $exitCode4 = Artisan::call('config:cache');
+    return '<h1>Facade, Routes, Views, and Config cache values cleared</h1>';
+});

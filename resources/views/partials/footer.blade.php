@@ -1,6 +1,5 @@
-<footer>
+<footer id="nw-footer">
     <div class="footer-content container">
-        <div class="made-with">Made with <i class="fa fa-heart heart"></i> by Andre Madarang</div>
-        {{ menu('footer', 'partials.menus.footer') }}
+        <div><i class="fa fa-copyright"></i> 2018 by NW Energy Direct</div>
     </div> <!-- end footer-content -->
 </footer>

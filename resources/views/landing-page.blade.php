@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel Ecommerce Example</title>
+        <title>NW Energy Direct</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:300,400,700" rel="stylesheet">
@@ -14,13 +14,14 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     </head>
     <body>
         <header class="with-background">
             <div class="top-nav container">
                 <div class="top-nav-left">
-                    <div class="logo">Ecommerce</div>
+                    <div class="logo">NW Energy Direct</div>
                     {{ menu('main', 'partials.menus.main') }}
                 </div>
                 <div class="top-nav-right">
@@ -29,11 +30,11 @@
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
-                    <h1>Laravel Ecommerce Demo</h1>
-                    <p>Includes multiple products, categories, a shopping cart and a checkout system with Stripe integration.</p>
+                    <h1>Instrumentation Store</h1>
+                    <p>Our products range from lighting products to VFDs to valves and actuators.  We supply products for building controls systems across the state of Washington.</p>
+                    <p>We offer products from reputable manufacturers.</p>
                     <div class="hero-buttons">
-                        <a href="https://www.youtube.com/playlist?list=PLEhEHUEU3x5oPTli631ZX9cxl6cU_sDaR" class="button button-white">Screencasts</a>
-                        <a href="https://github.com/drehimself/laravel-ecommerce-example" class="button button-white">GitHub</a>
+                        <a href="" class="button button-white">Manufacturer List</a>
                     </div>
                 </div> <!-- end hero-copy -->
 
@@ -46,9 +47,9 @@
         <div class="featured-section">
 
             <div class="container">
-                <h1 class="text-center">Laravel Ecommerce</h1>
+                <h1 class="text-center">Featured Products</h1>
 
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vitae nisi, consequuntur illum dolores cumque pariatur quis provident deleniti nesciunt officia est reprehenderit sunt aliquid possimus temporibus enim eum hic lorem.</p>
+                <p class="section-description text-center">For our complete inventory of products and the ability to search and filter products, please visit the shop.</p>
 
                 <div class="text-center button-container">
                     <a href="#" class="button">Featured</a>
@@ -82,32 +83,6 @@
             </div> <!-- end container -->
 
         </div> <!-- end featured-section -->
-
-        <div class="blog-section">
-            <div class="container">
-                <h1 class="text-center">From Our Blog</h1>
-
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vitae nisi, consequuntur illum dolores cumque pariatur quis provident deleniti nesciunt officia est reprehenderit sunt aliquid possimus temporibus enim eum hic.</p>
-
-                <div class="blog-posts">
-                    <div class="blog-post" id="blog1">
-                        <a href="#"><img src="/img/blog1.png" alt="Blog Image"></a>
-                        <a href="#"><h2 class="blog-title">Blog Post Title 1</h2></a>
-                        <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
-                    </div>
-                    <div class="blog-post" id="blog2">
-                        <a href="#"><img src="/img/blog2.png" alt="Blog Image"></a>
-                        <a href="#"><h2 class="blog-title">Blog Post Title 2</h2></a>
-                        <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
-                    </div>
-                    <div class="blog-post" id="blog3">
-                        <a href="#"><img src="/img/blog3.png" alt="Blog Image"></a>
-                        <a href="#"><h2 class="blog-title">Blog Post Title 3</h2></a>
-                        <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
-                    </div>
-                </div>
-            </div> <!-- end container -->
-        </div> <!-- end blog-section -->
 
         @include('partials.footer')
 
