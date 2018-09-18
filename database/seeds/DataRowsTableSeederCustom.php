@@ -94,7 +94,7 @@ class DataRowsTableSeederCustom extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'details'      => '{"validation":{"rule":"required|regex:/^\\\d*(\\\.\\\d{1,2})?$/"}}',
+                'details'      => '{"validation":{"rule":"required|regex:/^\\d*(\\.\\d{1,2})?$/"}}',
                 'order'        => 5,
             ])->save();
         }
@@ -192,22 +192,6 @@ class DataRowsTableSeederCustom extends Seeder
                 'delete'       => 1,
                 'details'      => '',
                 'order'        => 11,
-            ])->save();
-        }
-
-        $dataRow = $this->dataRow($productDataType, 'quantity');
-        if (!$dataRow->exists) {
-            $dataRow->fill([
-                'type'         => 'number',
-                'display_name' => 'Quantity',
-                'required'     => 1,
-                'browse'       => 1,
-                'read'         => 1,
-                'edit'         => 1,
-                'add'          => 1,
-                'delete'       => 1,
-                'details'      => '',
-                'order'        => 8,
             ])->save();
         }
 

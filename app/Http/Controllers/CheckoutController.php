@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Product;
 use App\OrderProduct;
 use App\Mail\OrderPlaced;
 use Illuminate\Http\Request;
@@ -31,10 +30,10 @@ class CheckoutController extends Controller
         }
 
         return view('checkout')->with([
-            'discount' => getNumbers()->get('discount'),
-            'newSubtotal' => getNumbers()->get('newSubtotal'),
-            'newTax' => getNumbers()->get('newTax'),
-            'newTotal' => getNumbers()->get('newTotal'),
+            'discount' => $this->getNumbers()->get('discount'),
+            'newSubtotal' => $this->getNumbers()->get('newSubtotal'),
+            'newTax' => $this->getNumbers()->get('newTax'),
+            'newTotal' => $this->getNumbers()->get('newTotal'),
         ]);
     }
 
@@ -47,18 +46,13 @@ class CheckoutController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
-        // Check race condition when there are less items available to purchase
-        if ($this->productsAreNoLongerAvailable()) {
-            return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
-        }
-
         $contents = Cart::content()->map(function ($item) {
             return $item->model->slug.', '.$item->qty;
         })->values()->toJson();
 
         try {
             $charge = Stripe::charges()->create([
-                'amount' => getNumbers()->get('newTotal') / 100,
+                'amount' => $this->getNumbers()->get('newTotal') / 100,
                 'currency' => 'CAD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
@@ -72,9 +66,6 @@ class CheckoutController extends Controller
 
             $order = $this->addToOrdersTables($request, null);
             Mail::send(new OrderPlaced($order));
-
-            // decrease the quantities of all the products in the cart
-            $this->decreaseQuantities();
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
@@ -99,11 +90,11 @@ class CheckoutController extends Controller
             'billing_postalcode' => $request->postalcode,
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
-            'billing_discount' => getNumbers()->get('discount'),
-            'billing_discount_code' => getNumbers()->get('code'),
-            'billing_subtotal' => getNumbers()->get('newSubtotal'),
-            'billing_tax' => getNumbers()->get('newTax'),
-            'billing_total' => getNumbers()->get('newTotal'),
+            'billing_discount' => $this->getNumbers()->get('discount'),
+            'billing_discount_code' => $this->getNumbers()->get('code'),
+            'billing_subtotal' => $this->getNumbers()->get('newSubtotal'),
+            'billing_tax' => $this->getNumbers()->get('newTax'),
+            'billing_total' => $this->getNumbers()->get('newTotal'),
             'error' => $error,
         ]);
 
@@ -119,24 +110,22 @@ class CheckoutController extends Controller
         return $order;
     }
 
-    protected function decreaseQuantities()
+    private function getNumbers()
     {
-        foreach (Cart::content() as $item) {
-            $product = Product::find($item->model->id);
+        $tax = config('cart.tax') / 100;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $code = session()->get('coupon')['name'] ?? null;
+        $newSubtotal = (Cart::subtotal() - $discount);
+        $newTax = $newSubtotal * $tax;
+        $newTotal = $newSubtotal * (1 + $tax);
 
-            $product->update(['quantity' => $product->quantity - $item->qty]);
-        }
-    }
-
-    protected function productsAreNoLongerAvailable()
-    {
-        foreach (Cart::content() as $item) {
-            $product = Product::find($item->model->id);
-            if ($product->quantity < $item->qty) {
-                return true;
-            }
-        }
-
-        return false;
+        return collect([
+            'tax' => $tax,
+            'discount' => $discount,
+            'code' => $code,
+            'newSubtotal' => $newSubtotal,
+            'newTax' => $newTax,
+            'newTotal' => $newTotal,
+        ]);
     }
 }

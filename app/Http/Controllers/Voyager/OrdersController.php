@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Events\BreadDataUpdated;
-use TCG\Voyager\Http\Controllers\VoyagerBaseController;
+use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
-class OrdersController extends VoyagerBaseController
+class OrdersController extends VoyagerBreadController
 {
     //***************************************
     //                _____

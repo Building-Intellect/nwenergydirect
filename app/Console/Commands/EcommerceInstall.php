@@ -65,14 +65,10 @@ class EcommerceInstall extends Command
         File::copyDirectory(public_path('img/posts'), public_path('storage/posts'));
         File::copyDirectory(public_path('img/users'), public_path('storage/users'));
 
-        try {
-            $this->call('migrate:fresh', [
-                '--seed' => true,
-                '--force' => true,
-            ]);
-        } catch (\Exception $e) {
-            $this->error('Algolia credentials incorrect. Your products table is NOT seeded correctly. If you are not using Algolia, remove Searchable trait from App\Product');
-        }
+        $this->call('migrate:fresh', [
+            '--seed' => true,
+            '--force' => true,
+        ]);
 
         $this->call('db:seed', [
             '--class' => 'VoyagerDatabaseSeeder',
@@ -128,23 +124,6 @@ class EcommerceInstall extends Command
             '--class' => 'UsersTableSeederCustom',
             '--force' => true,
         ]);
-
-        $this->call('db:seed', [
-            '--class' => 'SettingsTableSeederCustom',
-            '--force' => true,
-        ]);
-
-        try {
-            $this->call('scout:clear', [
-                'model' => 'App\\Product',
-            ]);
-
-            $this->call('scout:import', [
-                'model' => 'App\\Product',
-            ]);
-        } catch (\Exception $e) {
-            $this->error('Algolia credentials incorrect. Check your .env file.');
-        }
 
         $this->info('Dummy data installed');
     }
