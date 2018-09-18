@@ -1,12 +1,8 @@
-![Laravel Ecommerce Example](https://user-images.githubusercontent.com/4316355/36414878-d41987b2-15f1-11e8-9f2c-6c3a68e4a14b.gif)
-
-# Laravel Ecommerce Example
+# Northwest Energy Direct Ecommerce
 
 Code for YouTube video series: [https://www.youtube.com/watch?v=o5PWIuDTgxg&list=PLEhEHUEU3x5oPTli631ZX9cxl6cU_sDaR](https://www.youtube.com/watch?v=o5PWIuDTgxg&list=PLEhEHUEU3x5oPTli631ZX9cxl6cU_sDaR)
 
-Website Demo: [https://laravelecommerceexample.ca](https://laravelecommerceexample.ca). The demo has limited permissions. Install locally for full access.
-
-## Installation
+## Installation and Setup
 
 1. Clone the repo and `cd` into it
 1. `composer install`
@@ -19,8 +15,23 @@ Website Demo: [https://laravelecommerceexample.ca](https://laravelecommerceexamp
 1. `php artisan ecommerce:install`. This will migrate the database and run any seeders necessary
 1. `npm install`
 1. `npm run dev`
-1. `php artisan serve` or use Laravel Valet or Laravel Homestead
-1. Visit `localhost:8000` in your browser
+1. `sudo nano /opt/lampp/apache2/conf/httpd.conf`
+1. Add `Listen 48505` line at the top of configuration, then save.
+1. `sudo nano /opt/lampp/etc/extra/httpd-vhosts.conf`
+1. Add the following VirtualHost block and save:
+```
+<VirtualHost *:48505>
+    DocumentRoot "/opt/lampp/htdocs/nwenergydirect/public"
+    ServerName nwenergydirect.local
+</VirtualHost>
+```
+1. `sudo nano /etc/hosts`
+1. Add the following hostname line `127.0.0.1       nwenergydirect.local` and save:
+1. Modify permissions for storage and cache folders
+1. `sudo chmod -R 777 /opt/lampp/htdocs/nwenergydirect/storage`
+1. `sudo chmod -R 777 /opt/lampp/htdocs/nwenergydirect/bootstrap/cache`
+1. `sudo /opt/lampp/manager-linux-x64.run`
+1. Restart all, then visit http://nwenergydirect.local:48505 in browser and PRESTO!
 1. Visit `/admin` if you want to access the Voyager admin backend. Admin User/Password: `admin@admin.com/password`. Admin Web User/Password: `adminweb@adminweb.com/password`
 
 ## Windows Users
@@ -29,11 +40,3 @@ The `money_format` function does not work in Windows. Take a look at [this threa
 
 1. In `app/helpers.php` replace `money_format` line with `return '$'.number_format($price / 100, 2);`
 1. In `app/Product.php` replace `money_format` line with `return '$'.number_format($this->price / 100, 2);`
-
-## Starting from a particular point
-
-If you would like to follow along from a particular point, follow these instructions. I'm going to be starting from my starting point in the first video of the series. You can choose any point by replacing the hash with [any particular commit](https://github.com/drehimself/laravel-ecommerce-example/commits/master).
-
-1. Clone the repo and `cd` into it
-1. `git checkout f4f651a8a35ebb2ff38ba15771fd65c93051f942`
-1. Follow the rest of the steps above. Instead of `php artisan ecommerce:install`, migrate and seed the normal way with `php artisan migrate --seed`
