@@ -68,6 +68,7 @@ class EcommerceInstall extends Command
         $this->call('migrate:fresh', [
             '--seed' => true,
             '--force' => true,
+            '--path' => 'database/migrations',
         ]);
 
         $this->call('db:seed', [
