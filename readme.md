@@ -5,14 +5,14 @@ Code for YouTube video series: [https://www.youtube.com/watch?v=o5PWIuDTgxg&list
 ## Installation and Setup
 
 1. Clone the repo and `cd` into it
-1. `composer install`
 1. Rename or copy `.env.example` file to `.env`
+1. Make sure nwenergydirect database is created in phpmyadmin and set database credentials for admin account in your `.env` file
+1. `composer install`
 1. `php artisan key:generate`
-1. Set your database credentials in your `.env` file
 1. Set your Stripe credentials in your `.env` file. Specifically `STRIPE_KEY` and `STRIPE_SECRET`
-1. Set your `APP_URL` in your `.env` file. This is needed for Voyager to correctly resolve asset URLs.
 1. Set `ADMIN_PASSWORD` in your `.env` file if you want to specify an admin password. If not, the default password is 'password'
 1. `php artisan ecommerce:install`. This will migrate the database and run any seeders necessary
+1. `wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb && sudo dpkg -i /tmp/libpng12.deb && rm /tmp/libpng12.deb`
 1. `npm install`
 1. `npm run dev`
 1. `sudo nano /opt/lampp/apache2/conf/httpd.conf`
