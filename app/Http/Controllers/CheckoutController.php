@@ -39,7 +39,7 @@ class CheckoutController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Stores a newly created resource in storage, Stripe charges card
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -53,7 +53,7 @@ class CheckoutController extends Controller
         try {
             $charge = Stripe::charges()->create([
                 'amount' => getNumbers()->get('newTotal') / 100,
-                'currency' => 'CAD',
+                'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
                 'receipt_email' => $request->email,
@@ -65,7 +65,7 @@ class CheckoutController extends Controller
             ]);
 
             $order = $this->addToOrdersTables($request, null);
-            Mail::send(new OrderPlaced($order));
+            //Mail::send(new OrderPlaced($order));
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
