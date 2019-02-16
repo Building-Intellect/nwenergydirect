@@ -100,7 +100,6 @@
 
                     <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
 
-
                 </form>
             </div>
 

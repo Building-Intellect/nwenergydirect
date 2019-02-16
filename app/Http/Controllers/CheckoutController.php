@@ -64,13 +64,14 @@ class CheckoutController extends Controller
                 ],
             ]);
 
+            // Stripe transaction is successful, store order and send email
             $order = $this->addToOrdersTables($request, null);
-            //Mail::send(new OrderPlaced($order));
-
+            Mail::send(new OrderPlaced($order));
             Cart::instance('default')->destroy();
             session()->forget('coupon');
+            return redirect()->route('confirmation.index')->with('success_message',
+                'Thank you! Your payment has been successfully processed!');
 
-            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         } catch (CardErrorException $e) {
             $this->addToOrdersTables($request, $e->getMessage());
             return back()->withErrors('Error! ' . $e->getMessage());
