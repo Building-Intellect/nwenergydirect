@@ -596,11 +596,11 @@ class DataRowsTableSeederCustom extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($ordersDataType, 'billing_province');
+        $dataRow = $this->dataRow($ordersDataType, 'billing_state');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type' => 'text',
-                'display_name' => 'Billing Province',
+                'display_name' => 'Billing State',
                 'required' => 1,
                 'browse' => 0,
                 'read' => 1,
