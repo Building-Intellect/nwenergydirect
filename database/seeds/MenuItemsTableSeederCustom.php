@@ -332,7 +332,7 @@ class MenuItemsTableSeederCustom extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id' => $menu->id,
-                'title'   => 'Blog',
+                'title'   => 'Contact',
                 'url'     => '#',
                 'route'   => null,
             ]);
