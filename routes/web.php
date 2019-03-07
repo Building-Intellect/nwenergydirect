@@ -28,7 +28,7 @@ Route::get('/guestCheckout', 'CheckoutController@index')->name('guestCheckout.in
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin'], function() {
     Voyager::routes();
 });
 
@@ -37,6 +37,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'ShopController@search')->name('search');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/my-account', 'UsersController@edit')->name('users.edit');
+    Route::patch('/my-account', 'UsersController@update')->name('users.update');
+    Route::get('/my-orders', 'OrdersController@index')->name('orders.index');
+    Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show');
+});
 
 // Clear all cache values:
 Route::get('clear-cache', function() {

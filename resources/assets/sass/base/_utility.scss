@@ -7,15 +7,23 @@
 }
 
 .sticky-footer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .full-width {
-  width: 100%;
+    width: 100%;
 }
 
 strong {
-  font-weight: bold;
+    font-weight: bold;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.font-bold {
+    font-weight: bold;
 }

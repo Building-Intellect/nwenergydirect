@@ -164,16 +164,39 @@
             margin-left: 10px;
         }
     }
-    
-    .auth-pages {
-    margin: 50px auto;
-    grid-template-columns: 1fr;
-    grid-gap: 40px;
-     .auth-right {
-        border-left: none;
-        padding-left: 20px;
+
+    .search-results-container-algolia {
+        grid-template-columns: 1fr;
     }
-}
+
+    .ais-refinement-list--count {
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .auth-pages {
+        margin: 50px auto;
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+
+        .auth-right {
+            border-left: none;
+            padding-left: 20px;
+        }
+    }
+
+    .my-account input {
+        width: 100%;
+    }
+
+    .my-orders .order-header-items {
+        display: block;
+    }
+
+
+    .my-orders .order-header-items > div {
+        margin-bottom: 14px;
+    }
 }
 
 /* Small Devices, Tablets */
