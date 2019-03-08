@@ -32,7 +32,7 @@ Code for YouTube video series: [https://www.youtube.com/watch?v=o5PWIuDTgxg&list
 1. `sudo chmod -R 777 /opt/lampp/htdocs/nwenergydirect/bootstrap/cache`
 1. `sudo /opt/lampp/manager-linux-x64.run`
 1. Restart all, then visit http://nwenergydirect.local:48504 in browser and PRESTO!
-1. Visit `/admin` if you want to access the Voyager admin backend. Admin User/Password: `admin@admin.com/password`. Admin Web User/Password: `adminweb@adminweb.com/password`
+1. Visit `/admin` if you want to access the Voyager admin backend. Admin User/Password: `admin@admin.com/password` by default.
 
 ## Windows Users
 
